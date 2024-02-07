@@ -23,24 +23,26 @@ export default function Home() {
 
   useEffect(() => {
     const tags = loadTags(todos, autoCompleteTags);
-    setAutoCompleteTags(tags);
-  }, [todos, autoCompleteTags])
-
+    setAutoCompleteTags(tags); 
+  }, [todos]) 
+  
+  
   const saveTodo = async (value: string, tags: string[]) => {
     if (value.trim() !== '') {
       setIsLoading(true);
-      const data = [{ value, tags }, ...todos];
-      await postTodos(data);
-      setTodos(data);
+      const newData = [{ value, tags }, ...todos];
+      await postTodos(newData);
+      setTodos(newData);
       setIsLoading(false);
     }
   };
-
+  
+  
   const deleteTodo = async (index: number) => {
     setIsLoading(true);
-    const data = todos.filter((_, i) => i !== index);
-    await postTodos(data);
-    setTodos(data);
+    const newData = todos.filter((_, i) => i !== index);
+    await postTodos(newData);
+    setTodos(newData);
     setIsLoading(false);
   };
 
